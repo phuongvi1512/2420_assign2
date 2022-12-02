@@ -25,11 +25,13 @@ The assignment is to
   **Important** We MUST install Volta before installing Node and Fastify
   
   > To download volta, run command: curl https://get.volta.sh | bash
+  > 
   > To source bash file, run command: source ~/.bashrc
   
   After that, we can use volta to install node and npm
   
   > To install node, run command: volta install node
+  > 
   > To install npm, run command: volta install npm
 
 
@@ -44,6 +46,7 @@ The assignment is to
   ![load balancer picture](/images/load-balancer-5.png)
   **Note**: 
   > The tag of load balancer MUST match the <ins>tag</ins> of the droplets
+  > 
   > When creating load balancer and droplets, make sure to have same VPC 
   ![Tag of load balancer picture](/images/load-balancer-4.png)
   
@@ -70,12 +73,16 @@ The assignment is to
 ### Step 2: create regular user
 Connect to the droplets using the SSH key generated
 > Command to connect droplets from local host: ssh root@<IP-address>
+>
 > To add new user using bash shell, run command: useradd -ms /bin/bash <username>
+>
 > To add sudo privilegies to regular user, run command: usermod -aG sudo <username>
+>
 > To change password, run command: passwd <username>
   
 ### Step 3: Install Web server using Caddy
   > To download Caddy, run command: wget https://github.com/caddyserver/caddy/releases/download/v2.6.2/caddy_2.6.2_linux_amd64.tar.gz
+  >
   > To unarchive tar.gz file, run command: tar xvf caddy_2.6.2_linux_amd64.tar.gz
 
   ![image to download Caddy](/images/caddy-download.png)
@@ -83,6 +90,7 @@ Connect to the droplets using the SSH key generated
   ![image to unarchive Caddy](/images/caddy-extract.png)
   
   > Move caddy file to usr/bin, run command: sudo cp caddy /usr/bin/
+  >
   > To change user ownership, run command: sudo chown root:caddy
   
 ### Step 4
