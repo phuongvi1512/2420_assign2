@@ -125,23 +125,29 @@ Connect to the droplets using the SSH key generated
   * edit the file using vim: 
      > sudo vim hello_web.service
   The desired file should like below
+  
  ![hello_web.service file](/images/)
  
  ### Step 8: upload to server
   * Use **rsync** to upload the directory created in local host
   > run command: rsync -r <dir-name> "<username>@<server-ip-address>" -e "ssh -i ~/.ssh/<ssh key file> -o"
+  
   **Note**: if error "Permission denied" when running the command, re run the command with "StrictHostKeyChecking=no"
  
   * Move Caddyfile:
       * Before moving Caddyfile, check if the directory /etc/caddy existed. If not, create the directory
      > to move Caddyfile, use command: sudo cp Caddyfile /etc/caddy/Caddyfile
+  
   * Move src and html directory
      * in /var directory, if /www directory is not existed, create /www directory
        to move directory html and src into /var/www directory, run command
        > sudo cp -r html/ src/ /var/www/
+  
  ### Step 9:
   * test your load balancer ip address
+  
   * the desired output should look like
+  
  ![image of server 1 html](/images/website.png)
  
  ![image of server 2 html](/images/website-server2.png)
