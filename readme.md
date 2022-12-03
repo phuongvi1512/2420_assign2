@@ -91,6 +91,7 @@ Connect to the droplets using the SSH key generated
  * In src directory, create new node project
  > npm init
  > npm i fastify
+  
  then create index.js file using fastify hello world example
  
  **Note**: The index.js file should have the same port number with Caddyfile
@@ -128,6 +129,7 @@ Connect to the droplets using the SSH key generated
   * create service file name: hello_web.service
   * edit the file using vim: 
      > sudo vim hello_web.service
+  
   The desired file should like below
   
  ![hello_web.service file](/images/hello_web_service_file.png)
