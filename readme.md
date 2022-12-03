@@ -143,6 +143,16 @@ Connect to the droplets using the SSH key generated
        to move directory html and src into /var/www directory, run command
        > sudo cp -r html/ src/ /var/www/
   
+  * Move hello_web.service into /etc/systemd/system directory
+     > sudo cp hello_web.service /etc/systemd/system/hello_web.service
+  
+  * After moving all above files into right location, use **systemctl** command to start the service
+    > sudo systemctl daemon-reload
+    >
+    > sudo systemctl restart caddy.service
+    >
+    > sudo systemctl start/restart hello_web.service  
+  
  ### Step 9:
   * test your load balancer ip address
   
