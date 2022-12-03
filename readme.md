@@ -2,6 +2,9 @@
 
 My Load Balancer IP address: http://24.199.69.238
 
+## Author
+Phuong Vi Dang A01292902 
+
 ## Description
 The assignment is to
 * Create VPC 
@@ -18,21 +21,6 @@ The assignment is to
 * Volta to install node
 * Fastify for NodeJs server
 * Text editors: Vim or Nano
-
-## Prepared Steps
-
-4. Install Volta, Node and Fastify in server
-  **Important** We MUST install Volta before installing Node and Fastify
-  
-  > To download volta, run command: curl https://get.volta.sh | bash
-  > 
-  > To source bash file, run command: source ~/.bashrc
-  
-  After that, we can use volta to install node and npm
-  
-  > To install node, run command: volta install node
-  > 
-  > To install npm, run command: volta install npm
 
 
 ## Instructions
@@ -80,7 +68,7 @@ Connect to the droplets using the SSH key generated
 >
 > To change password, run command: passwd <username>
   
-### Step 3: Install Web server using Caddy
+### Step 3: Install Web server using Caddy in remote server
   > To download Caddy, run command: wget https://github.com/caddyserver/caddy/releases/download/v2.6.2/caddy_2.6.2_linux_amd64.tar.gz
   >
   > To unarchive tar.gz file, run command: tar xvf caddy_2.6.2_linux_amd64.tar.gz
@@ -94,7 +82,69 @@ Connect to the droplets using the SSH key generated
   > To change user ownership, run command: sudo chown root:caddy
   
 ### Step 4
-  1. Write web app
-  2. In local host, create directory and make node project
+  #### 1. Write web app
+ * In wsl, create directories <ins>html</ins> and <ins>src</ins>
+ > mkdir html && mkdir src
+ * in html directory, create index.html page
+ > touch html/index.html
+ in the index.htmml that just created, create a complete html document.
+ * In src directory, create new node project
+ > npm init
+ > npm i fastify
+ then create index.js file using fastify hello world example
+ 
+  #### 2. In local host, create directory and make node project
   
-                                         
+ ### Step 5 write Caddyfile
+
+ > to create, run command: sudo touch Caddyfile
+ >
+ > to edit the file, run command: sudo vim Caddyfile
+ **Note**: 
+     make sure to use the command with sudo privilege
+     make sure to add reverse proxy server of <ins>localhost:5050</ins> and change the route to <ins>/api</ins>
+ * The **Caddyfile** should look like below
+  ![caddy file configuration](/images/caddy-conf-file-img.png)
+ 
+### Step 6: Install node in and fastify
+ 
+  **Important** We MUST install Volta before installing Node and Fastify
+  
+  > To download volta, run command: curl https://get.volta.sh | bash
+  > 
+  > To source bash file, run command: source ~/.bashrc
+  
+  After that, we can use volta to install node and npm
+  
+  > To install node, run command: volta install node
+  > 
+  > To install npm, run command: volta install npm
+ 
+ ### Step 7: write service file to start node application
+  * create service file name: hello_web.service
+  * edit the file using vim: 
+     > sudo vim hello_web.service
+  The desired file should like below
+ ![hello_web.service file](/images/)
+ 
+ ### Step 8: upload to server
+  * Use **rsync** to upload the directory created in local host
+  > run command: rsync -r <dir-name> "<username>@<server-ip-address>" -e "ssh -i ~/.ssh/<ssh key file> -o"
+  **Note**: if error "Permission denied" when running the command, re run the command with "StrictHostKeyChecking=no"
+ 
+  * Move Caddyfile:
+      * Before moving Caddyfile, check if the directory /etc/caddy existed. If not, create the directory
+     > to move Caddyfile, use command: sudo cp Caddyfile /etc/caddy/Caddyfile
+  * Move src and html directory
+     * in /var directory, if /www directory is not existed, create /www directory
+       to move directory html and src into /var/www directory, run command
+       > sudo cp -r html/ src/ /var/www/
+ ### Step 9:
+  * test your load balancer ip address
+  * the desired output should look like
+ ![image of server 1 html](/images/website.png)
+ 
+ ![image of server 2 html](/images/website-server2.png)
+ 
+ ![image of index.js file](/images/api-route.png)
+     
