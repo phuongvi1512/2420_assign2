@@ -93,6 +93,10 @@ Connect to the droplets using the SSH key generated
  > npm i fastify
  then create index.js file using fastify hello world example
  
+ **Note**: The index.js file should have the same port number with Caddyfile
+ 
+ ![image of index.js file](/images/index-js-file.png)
+ 
   #### 2. In local host, create directory and make node project
   
  ### Step 5 write Caddyfile
@@ -126,11 +130,13 @@ Connect to the droplets using the SSH key generated
      > sudo vim hello_web.service
   The desired file should like below
   
- ![hello_web.service file](/images/)
+ ![hello_web.service file](/images/hello_web_service_file.png)
  
  ### Step 8: upload to server
   * Use **rsync** to upload the directory created in local host
-  > run command: rsync -r <dir-name> "<username>@<server-ip-address>" -e "ssh -i ~/.ssh/<ssh key file> -o"
+  > run command: rsync -r dir-name "username@server-ip-address" -e "ssh -i ~/.ssh/ssh-key-file -o"
+  
+  ![rsync command](/images/rsync-command.png)
   
   **Note**: if error "Permission denied" when running the command, re run the command with "StrictHostKeyChecking=no"
  
